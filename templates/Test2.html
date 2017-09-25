@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link href="../static/css/bootstrap.css" rel="stylesheet">
+    <script src="../static/js/jquery-3.1.0.min.js"></script>
+    <script src="../static/js/bootstrap.js"></script>
+
+
+    <script>
+        /*/ 提交表单
+        function check_form()
+        {
+            var nginx_ip = $.trim($('#nginx_ip').val());
+            var upstream_name     = $.trim($('#stream_name').val());
+             var  host_ip    = $.trim($('#host_ip').val());
+
+            if(!nginx_ip) {
+                alert('nginx ip不能为空！');
+                return false;
+            }
+            if(!upstream_name) {
+                alert('upstream名称不能为空！');
+                return false;
+            }
+            if(!host_ip) {
+                alert('后端主机 ip不能为空！');
+                return false;
+            }
+            var host_data = $('#form_data').serialize();
+
+            // 异步提交数据到action/add_action.php页面
+            $.ajax(
+                    {
+                        url: "action/user_action.php",
+                        data:{"form_data":form_data,"act":act},
+                        type: "post",
+                        beforeSend:function()
+                        {
+                            $("#tip").html("<span style='color:blue'>正在处理...</span>");
+                            return true;
+                        },
+                        success:function(data)
+                        {
+                            if(data > 0)
+                            {
+
+                                var msg = "添加";
+                                if(act == "edit") msg = "编辑";
+                                $("#tip").html("<span style='color:blueviolet'>恭喜，" +msg+ "成功！</span>");
+                                // document.location.href='system_notice.php'
+                                alert(msg + "OK！");
+                                location.reload();
+                            }
+                            else
+                            {
+                                $("#tip").html("<span style='color:red'>失败，请重试</span>");
+                                alert('操作失败');
+                            }
+                        },
+                        error:function()
+                        {
+                            alert('请求出错');
+                        },
+                        complete:function()
+                        {
+                            $('#acting_tips').hide();
+                        }
+                    });
+
+            return false;
+        }
+
+        $(function () { $('#addUserModal').on('hide.bs.modal', function () {
+            // 关闭时清空edit状态为add
+            $("#act").val("add");
+            location.reload();
+        })
+        }); */
+    </script>
+    <script>
+    </script>
+</head>
+<body>
+<div class="container">
+    <div class="demo">
+        <div class="demo_4">
+            <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#addUserModal">
+                添加主机
+            </button>
+        </div>
+    </div>
+    <form action="{{ url_for("AppendBackHost") }}" method="post" id="add_host" style="margin: 20px;">
+        <div class="modal fade" id="addHost" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+
+        </div>
+
+    </form>
+</div>
+
+</body>
+</html>

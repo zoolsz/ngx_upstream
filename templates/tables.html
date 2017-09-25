@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Tables - SB Admin</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/static/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Add custom CSS here -->
+    <link href="/static/css/sb-admin.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/font-awesome/css/font-awesome.min.css">
+    <link href="/static/css/bootstrap-switch.css" rel="stylesheet">
+    <link href="/static/css/sweetalert.min.css"rel="stylesheet">
+</head>
+
+<body>
+
+<div id="wrapper">
+
+    <!-- Sidebar -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <!-- Brand and toggle get grouped for better mobile display -->
+
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav side-nav">
+                <li><a href="index.html"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+                <li><a href="charts.html"><i class="fa fa-bar-chart-o"></i> Charts</a></li>
+                <li class="active"><a href="tables.html"><i class="fa fa-table"></i> Tables</a></li>
+                <li><a href="forms.html"><i class="fa fa-edit"></i> Forms</a></li>
+                <li><a href="typography.html"><i class="fa fa-font"></i> Typography</a></li>
+                <li><a href="bootstrap-elements.html"><i class="fa fa-desktop"></i> Bootstrap Elements</a></li>
+                <li><a href="bootstrap-grid.html"><i class="fa fa-wrench"></i> Bootstrap Grid</a></li>
+                <li><a href="blank-page.html"><i class="fa fa-file"></i> Blank Page</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-caret-square-o-down"></i>
+                        Dropdown <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Dropdown Item</a></li>
+                        <li><a href="#">Another Item</a></li>
+                        <li><a href="#">Third Item</a></li>
+                        <li><a href="#">Last Item</a></li>
+                    </ul>
+                </li>
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right navbar-user">
+                <li class="dropdown messages-dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-envelope"></i> Messages
+                        <span class="badge">7</span> <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li class="dropdown-header">7 New Messages</li>
+                        <li class="message-preview">
+                            <a href="#">
+                                <span class="avatar"><img src="http://placehold.it/50x50"></span>
+                                <span class="name">John Smith:</span>
+                                <span class="message">Hey there, I wanted to ask you something...</span>
+                                <span class="time"><i class="fa fa-clock-o"></i> 4:34 PM</span>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li class="message-preview">
+                            <a href="#">
+                                <span class="avatar"><img src="http://placehold.it/50x50"></span>
+                                <span class="name">John Smith:</span>
+                                <span class="message">Hey there, I wanted to ask you something...</span>
+                                <span class="time"><i class="fa fa-clock-o"></i> 4:34 PM</span>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li class="message-preview">
+                            <a href="#">
+                                <span class="avatar"><img src="http://placehold.it/50x50"></span>
+                                <span class="name">John Smith:</span>
+                                <span class="message">Hey there, I wanted to ask you something...</span>
+                                <span class="time"><i class="fa fa-clock-o"></i> 4:34 PM</span>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li><a href="#">View Inbox <span class="badge">7</span></a></li>
+                    </ul>
+                </li>
+                <li class="dropdown alerts-dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i> Alerts <span
+                            class="badge">3</span> <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Default <span class="label label-default">Default</span></a></li>
+                        <li><a href="#">Primary <span class="label label-primary">Primary</span></a></li>
+                        <li><a href="#">Success <span class="label label-success">Success</span></a></li>
+                        <li><a href="#">Info <span class="label label-info">Info</span></a></li>
+                        <li><a href="#">Warning <span class="label label-warning">Warning</span></a></li>
+                        <li><a href="#">Danger <span class="label label-danger">Danger</span></a></li>
+                        <li class="divider"></li>
+                        <li><a href="#">View All</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown user-dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> John Smith <b
+                            class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#"><i class="fa fa-user"></i> Profile</a></li>
+                        <li><a href="#"><i class="fa fa-envelope"></i> Inbox <span class="badge">7</span></a></li>
+                        <li><a href="#"><i class="fa fa-gear"></i> Settings</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#"><i class="fa fa-power-off"></i> Log Out</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </nav>
+
+    <div id="page-wrapper">
+
+        <div class="row">
+            <div class="col-lg-12">
+                <h1>Host List
+                    <small>Sort Your Data</small>
+                </h1>
+                <ol class="breadcrumb">
+                    <li><a href="index.html"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+                    <li class="active"><i class="fa fa-table"></i> Tables</li>
+                </ol>
+            </div>
+        </div><!-- /.row -->
+
+        <div class="row">
+            <div class="col-lg-12 row">
+                <h2 class="col-md-3">Server List</h2>
+                <button style="margin-top: 0px;position: absolute;right: 15px;margin-right: 0; top: 20px;" data-target="#addHost" data-toggle="modal" class="col-md-1 btn-primary btn btn-sm">添加主机</button>
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th>序号<i class="fa"></i></th>
+                            <th>前端主机<i class="fa fa-sort"></i></th>
+                            <th>反代标签<i class="fa fa-sort"></i></th>
+                            <th>后端服务器<i class="fa fa-sort"></i></th>
+                            <th>权重<i class="fa"></i></th>
+                            <th>错误重试次数<i class="fa"></i></th>
+                            <th>超时时间<i class="fa"></i></th>
+                            <th>当前状态<i class="fa"></i></th>
+                            <th>手动BackUP<i class="fa"></i></th>
+                            <th>手动关闭<i class="fa"></i></th>
+                            <th>手动关闭开关<i class="fa"></i></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for x in host_list %}
+                            {% if x.status == 'No' and x.server_status =='UP' %}
+                                {% if x.backup == 'ON' %}
+                                    <tr style="background-color: #ffff1b">
+                                {% else %}
+                                    <tr class="active">
+                                {% endif %}
+                                    {% else %}
+                                    {% if x.server_status == 'Down' %}
+                                        <tr style="background-color: #c7254e">
+                                    {% else %}
+                                        <tr style="background-color: #ffb721">
+                                    {% endif %}
+                            {% endif %}
+                        <td>{{ loop.index }}</td>
+                        <td>{{ x.ngx_server }}</td>
+                        <td>{{ x.upstream_table }}</td>
+                        <td>{{ x.back_host }}</td>
+                        <td><a class="weight_state"  onclick="weight_check(this)">{{ x.weight }}</a></td>
+                        <td>{{ x.max_fails }}</td>
+                        <td>{{ x.fail_timeout }}</td>
+                        <td>{{ x.server_status }}</td>
+                        <td>
+                        {% if x.backup == 'OFF' %}
+                            <input class="back_switch" type="checkbox"  name="my-checkbox">
+                        {% else %}
+                            <input class="back_switch" type="checkbox" status="true" name="my-checkbox">
+                        {% endif %}
+                        </td>
+                        <td>{{ x.status }}</td>
+                        <td>
+                            {% if x.status == 'No' and x.server_status =='UP' %}
+                                <input  class="state_switch" status="true" type="checkbox" name="my-checkbox"   >
+                            {% else %}
+                                <input  class="state_switch" type="checkbox" name="my-checkbox" >
+                            {% endif %}
+
+                        </td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    <form method="post" class="form-horizontal"
+                          id="add_host" style="margin: 20px;">
+                        <div class="modal fade" id="addHost" tabindex="-1" role="dialog"
+                             aria-labelledby="myModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                            &times;
+                                        </button>
+                                        <h4 class="modal-title" id="host_lab">
+                                            新增Nginx后端主机
+                                        </h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form action="{{ url_for('append_back') }}"  class="form-horizontal" method="post">
+                                            <div class="form-group">
+                                                <label for="nginx_ip" class="col-sm-3 control-label">Nginx Server
+                                                    IP</label>
+                                                <div class="col-sm-9">
+                                                    {{ form.nginx_ip(class='form-control', placeholder='请输入推荐理由') }}
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="upstream_name" class="col-sm-3 control-label">location 名称</label>
+                                                <div class="col-sm-9">
+                                                    <input type="text" class="form-control" name="upstream_name" value=""
+                                                           id="upstream_name"
+                                                           placeholder="请输入nginx location 名称 如:urs-app">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="host_ip" class="col-sm-3 control-label">后端主机及端口号</label>
+                                                <div class="col-sm-9">
+                                                    <input type="text" class="form-control" name="host_ip" value=""
+                                                           id="host_ip"
+                                                           placeholder="例如 192.168.3.100:8080">
+                                                </div>
+                                            </div>
+
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                        <button id="hosClick" type="submit" class="btn btn-primary">
+                                            提交
+                                        </button>
+                                        <span id="tip"> </span>
+                                    </div>
+                                </div><!-- /.modal-content -->
+                            </div><!-- /.modal -->
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div><!-- /.row -->
+
+    </div><!-- /#page-wrapper -->
+
+</div><!-- /#wrapper -->
+
+<!-- JavaScript -->
+<script src="/static/js/jquery-1.10.2.js"></script>
+<script src="/static/js/bootstrap.js"></script>
+
+<!-- Page Specific Plugins -->
+<script src="/static/js/tablesorter/jquery.tablesorter.js"></script>
+<script src="/static/js/tablesorter/tables.js"></script>
+<script src="/static/js/bootstrap-switch.js"></script>
+<script src="/static/js/main.js"></script>
+<script src="/static/js/sweetalert.min.js"></script>
+
+
+<script>
+//手动关闭主机
+$("[name='my-checkbox']").each(function () {
+    $(this).bootstrapSwitch('state', Boolean($(this).attr("status")));
+});
+
+
+    $(".state_switch").on('switchChange.bootstrapSwitch', function(event, state) {
+        console.log(12345);
+        console.log(state);
+        var data_list = $(this).parents('tr');
+        swal({
+            title: "您确定要修改主机状态吗？",
+            text: "!注意 危险操作你确定要手动关闭这台主机吗？",
+            type: "warning",
+            showCancelButton: true,
+            closeOnConfirm: false,
+            confirmButtonText: "是的，我要修改",
+            cancelButtonText: "取消删除！",
+            confirmButtonColor: "#ee4329",
+            closeOnCancel: false
+        }, function (isConfirm) {
+            if (isConfirm) {
+                console.log(data_list);
+                console.log(state)
+                var ngx_server = data_list.children().eq(1).text();
+                var upstream_dir = data_list.children().eq(2).text();
+                var back_host = data_list.children().eq(3).text();
+                var host_data = ngx_server + '/' + upstream_dir + '/' + back_host
+                if (state == true) {
+                    var status_change = 'True';
+
+                } else {
+                    var status_change = 'False';
+                }
+                console.log(status_change, host_data);
+                $.ajax({
+                    url: '/status_change',
+                    type: 'POST',
+                    contentType: 'application/json; charset=UTF-8',
+                    data: JSON.stringify({data: host_data, status: status_change}),
+                    dataType: 'json',
+                    success: function (data) {
+                        if (data.status == 'success') {
+                            swal("操作成功!", "已成功删除数据！", "success");
+                        } else {
+                            swal("OMG", "删除操作失败了!", "error");
+                        }
+                    }
+                });
+            location.reload()
+            } else{
+                swal("取消！","操作已取消","error",location.reload())}
+        })
+    });
+    ///将主机的状态设置为backup
+    $(".back_switch").on('switchChange.bootstrapSwitch', function(event, state) {
+        console.log(7890);
+        console.log(state);
+        var data_list = $(this).parents('tr');
+        swal({
+            title: "您确定要修改主机状态吗？",
+            text: "!注意 危险操作你确定要这台这台主机为Backup吗？",
+            type: "warning",
+            showCancelButton: true,
+            closeOnConfirm: false,
+            confirmButtonText: "是的，我要修改",
+            cancelButtonText: "取消修改！",
+            confirmButtonColor: "#ee4329",
+            closeOnCancel: false
+        }, function (isConfirm) {
+            if (isConfirm) {
+                console.log(data_list)
+                var ngx_server = data_list.children().eq(1).text();
+                var upstream_dir = data_list.children().eq(2).text();
+                var back_host = data_list.children().eq(3).text();
+                var host_data = ngx_server + '/' + upstream_dir + '/' + back_host
+                if (state == true) {
+                    var status_change = 'True';
+
+                } else {
+                    var status_change = 'False';
+                }
+                console.log(status_change, host_data);
+                $.ajax({
+                    url: '/status_change',
+                    type: 'POST',
+                    contentType: 'application/json; charset=UTF-8',
+                    data: JSON.stringify({data: host_data, backup: status_change}),
+                    dataType: 'json',
+                    success: function (data) {
+                        if (data.status == 'success') {
+                            swal("操作成功!", "已成功修改！", "success");
+                        } else {
+                            swal("OMG", "修改操作失败了!", "error");
+                        }
+                    }
+                });
+            location.reload()
+            } else{
+                swal("取消！","操作已取消","error",location.reload())}
+        })
+    });
+</script>
+<script>
+    ////修改主机权重
+        function weight_check(aex) {
+            var data_list = $(aex).parents('tr');
+            console.log(data_list)
+            swal({
+                    title: "输入权重值！",
+                    text: "请输入：",
+                    type: "input",
+                    showCancelButton: true,
+                    closeOnConfirm: false,
+                    animation: "slide-from-top",
+                    inputPlaceholder: "输入一些话",
+                    inputType:"number"
+                },
+                function (inputValue) {
+                    var weight_number = parseInt(inputValue)
+                    console.log(weight_number)
+                    if (weight_number === "") {
+                        swal.showInputError("不能为空！");
+                        return false
+                    }
+                    if (weight_number < 1 ) {
+                        swal.showInputError("请正确输入大于1的数字");
+                        return false
+                    }
+                    var ngx_server = data_list.children().eq(1).text();
+                    var upstream_dir = data_list.children().eq(2).text();
+                    var back_host = data_list.children().eq(3).text();
+                    var host_data = ngx_server + '/' + upstream_dir + '/' + back_host
+                    $.ajax({
+                    url: '/weight_change',
+                    type: 'POST',
+                    contentType: 'application/json; charset=UTF-8',
+                    data: JSON.stringify({data: host_data, weight: weight_number}),
+                    dataType: 'json',
+                    success: function (data) {
+                        if (data.status == 'success') {
+                            swal("操作成功!", "已成功修改！", "success");
+                        } else {
+                            swal("OMG", "修改操作失败了!", "error");
+                        }
+                    }
+                });
+                });
+        }
+</script>
+<script>
+    ///新增主机
+    /*
+    function add_host() {
+        swal({
+                    title: "输入权重值！",
+                    text: "请输入：",
+                    type: "input",
+                    showCancelButton: true,
+                    closeOnConfirm: false,
+                    animation: "slide-from-top",
+                    inputPlaceholder: "输入一些话",
+                    inputType:"number"
+                },
+                function (inputValue) {
+                    var weight_number = parseInt(inputValue)
+                    console.log(weight_number)
+                    if (weight_number === "") {
+                        swal.showInputError("不能为空！");
+                        return false
+                    }
+                    if (weight_number < 1 ) {
+                        swal.showInputError("请正确输入大于1的数字");
+                        return false
+                    }
+                    var ngx_server = data_list.children().eq(1).text();
+                    var upstream_dir = data_list.children().eq(2).text();
+                    var back_host = data_list.children().eq(3).text();
+                    var host_data = ngx_server + '/' + upstream_dir + '/' + back_host
+                    $.ajax({
+                    url: '/weight_change',
+                    type: 'POST',
+                    contentType: 'application/json; charset=UTF-8',
+                    data: JSON.stringify({data: host_data, weight: weight_number}),
+                    dataType: 'json',
+                    success: function (data) {
+                        if (data.status == 'success') {
+                            swal("操作成功!", "已成功修改！", "success");
+                        } else {
+                            swal("OMG", "修改操作失败了!", "error");
+                        }
+                    }
+                });
+                });
+    }*/
+</script>
+
+</body>
+</html>
