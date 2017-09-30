@@ -15,7 +15,7 @@
     <link href="/static/css/sb-admin.css" rel="stylesheet">
     <link rel="stylesheet" href="/static/font-awesome/css/font-awesome.min.css">
     <link href="/static/css/bootstrap-switch.css" rel="stylesheet">
-    <link href="/static/css/sweetalert.min.css"rel="stylesheet">
+    <link href="/static/css/sweetalert.min.css" rel="stylesheet">
 </head>
 
 <body>
@@ -132,7 +132,9 @@
         <div class="row">
             <div class="col-lg-12 row">
                 <h2 class="col-md-3">Server List</h2>
-                <button style="margin-top: 0px;position: absolute;right: 15px;margin-right: 0; top: 20px;" data-target="#addHost" data-toggle="modal" class="col-md-1 btn-primary btn btn-sm">添加主机</button>
+                <button style="margin-top: 0px;position: absolute;right: 15px;margin-right: 0; top: 20px;"
+                        data-target="#AppendHost" data-toggle="modal" class="col-md-1 btn-primary btn btn-sm">添加主机
+                </button>
                 <div class="table-responsive">
                     <table class="table table-bordered">
                         <thead>
@@ -148,6 +150,7 @@
                             <th>手动BackUP<i class="fa"></i></th>
                             <th>手动关闭<i class="fa"></i></th>
                             <th>手动关闭开关<i class="fa"></i></th>
+                            <th>删除<i class="fa"></i></th>
                         </tr>
                         </thead>
                         <tbody>
@@ -155,98 +158,81 @@
                             {% if x.status == 'No' and x.server_status =='UP' %}
                                 {% if x.backup == 'ON' %}
                                     <tr style="background-color: #ffff1b">
-                                {% else %}
+                                        {% else %}
                                     <tr class="active">
                                 {% endif %}
+                            {% else %}
+                            {% if x.server_status == 'Down' %}
+                                <tr style="background-color: #c7254e">
                                     {% else %}
-                                    {% if x.server_status == 'Down' %}
-                                        <tr style="background-color: #c7254e">
-                                    {% else %}
-                                        <tr style="background-color: #ffb721">
-                                    {% endif %}
+                                <tr style="background-color: #ffb721">
+                            {% endif %}
                             {% endif %}
                         <td>{{ loop.index }}</td>
                         <td>{{ x.ngx_server }}</td>
                         <td>{{ x.upstream_table }}</td>
                         <td>{{ x.back_host }}</td>
-                        <td><a class="weight_state"  onclick="weight_check(this)">{{ x.weight }}</a></td>
+                        <td><a class="weight_state" onclick="weight_check(this)">{{ x.weight }}</a></td>
                         <td>{{ x.max_fails }}</td>
                         <td>{{ x.fail_timeout }}</td>
                         <td>{{ x.server_status }}</td>
                         <td>
-                        {% if x.backup == 'OFF' %}
-                            <input class="back_switch" type="checkbox"  name="my-checkbox">
-                        {% else %}
-                            <input class="back_switch" type="checkbox" status="true" name="my-checkbox">
-                        {% endif %}
+                            {% if x.backup == 'OFF' %}
+                                <input class="back_switch" type="checkbox" name="my-checkbox">
+                            {% else %}
+                                <input class="back_switch" type="checkbox" status="true" name="my-checkbox">
+                            {% endif %}
                         </td>
                         <td>{{ x.status }}</td>
                         <td>
                             {% if x.status == 'No' and x.server_status =='UP' %}
-                                <input  class="state_switch" status="true" type="checkbox" name="my-checkbox"   >
+                                <input class="state_switch" status="true" type="checkbox" name="my-checkbox">
                             {% else %}
-                                <input  class="state_switch" type="checkbox" name="my-checkbox" >
+                                <input class="state_switch" type="checkbox" name="my-checkbox">
                             {% endif %}
 
+                        </td>
+                        <td>
+                            <a class="fa fa-trash-o"  style="color: #c7254e; background-color: #e2e5e8 "  aria-hidden="true" title="删除主机" onclick="delete_host(this)"></a>
                         </td>
                         </tr>
                         {% endfor %}
                         </tbody>
-                    </table>
-                    <form method="post" class="form-horizontal"
-                          id="add_host" style="margin: 20px;">
-                        <div class="modal fade" id="addHost" tabindex="-1" role="dialog"
-                             aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal fade" id="AppendHost">
                             <div class="modal-dialog">
-                                <div class="modal-content">
+                                <div class="modal-content message_align">
                                     <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                                            &times;
-                                        </button>
-                                        <h4 class="modal-title" id="host_lab">
-                                            新增Nginx后端主机
-                                        </h4>
+                                        <button type="button" class="close" data-dismiss="modal"
+                                                aria-label="Close"><span
+                                                aria-hidden="true">×</span></button>
+                                        <h4 class="modal-title" id="NavModalTitle">添加后端主机</h4>
                                     </div>
-                                    <div class="modal-body">
-                                        <form action="{{ url_for('append_back') }}"  class="form-horizontal" method="post">
+                                    <form id="ApendHostForm" method="post"
+                                          action="{{ url_for('append_back') }}">
+                                        <div class="modal-body">
                                             <div class="form-group">
-                                                <label for="nginx_ip" class="col-sm-3 control-label">Nginx Server
-                                                    IP</label>
-                                                <div class="col-sm-9">
-                                                    {{ form.nginx_ip(class='form-control', placeholder='请输入推荐理由') }}
-                                                </div>
+                                                {{ form.nginx_ip.label }}
+                                                {{ form.nginx_ip(class='form-control',required='', value='例如:192.168.4.7')}}
+                                                {{ form.upstream_dir.label }}
+                                                {{ form.upstream_dir(class='form-control',required='', value='例如:prod-app') }}
+                                                {{ form.back_host.label }}
+                                                {{ form.back_host(class='form-control',required='', value='例如:192.168.4.210')}}
+                                                {{ form.back_Host_port.label }}
+                                                {{ form.back_Host_port(class='form-control',required='', value='8080')}}
                                             </div>
-
-                                            <div class="form-group">
-                                                <label for="upstream_name" class="col-sm-3 control-label">location 名称</label>
-                                                <div class="col-sm-9">
-                                                    <input type="text" class="form-control" name="upstream_name" value=""
-                                                           id="upstream_name"
-                                                           placeholder="请输入nginx location 名称 如:urs-app">
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="host_ip" class="col-sm-3 control-label">后端主机及端口号</label>
-                                                <div class="col-sm-9">
-                                                    <input type="text" class="form-control" name="host_ip" value=""
-                                                           id="host_ip"
-                                                           placeholder="例如 192.168.3.100:8080">
-                                                </div>
-                                            </div>
-
-                                        </form>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                                        <button id="hosClick" type="submit" class="btn btn-primary">
-                                            提交
-                                        </button>
-                                        <span id="tip"> </span>
-                                    </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">取消
+                                            </button>
+                                            <button id="apendHostClick" type="submit" class="btn btn-success">
+                                                确定
+                                            </button>
+                                        </div>
+                                    </form>
                                 </div><!-- /.modal-content -->
-                            </div><!-- /.modal -->
-                        </div>
-                    </form>
+                            </div><!-- /.modal-dialog -->
+                        </div><!-- /.modal -->
+                    </table>
                 </div>
             </div>
         </div><!-- /.row -->
@@ -268,13 +254,13 @@
 
 
 <script>
-//手动关闭主机
-$("[name='my-checkbox']").each(function () {
-    $(this).bootstrapSwitch('state', Boolean($(this).attr("status")));
-});
+    //手动关闭主机 开关样式初始化 并通过后端服务器状态定义开关初始值
+    $("[name='my-checkbox']").each(function () {
+        $(this).bootstrapSwitch('state', Boolean($(this).attr("status")));
+    });
 
 
-    $(".state_switch").on('switchChange.bootstrapSwitch', function(event, state) {
+    $(".state_switch").on('switchChange.bootstrapSwitch', function (event, state) {
         console.log(12345);
         console.log(state);
         var data_list = $(this).parents('tr');
@@ -288,7 +274,7 @@ $("[name='my-checkbox']").each(function () {
             cancelButtonText: "取消删除！",
             confirmButtonColor: "#ee4329",
             closeOnCancel: false
-        }, function (isConfirm) {
+        }, function (isConfirm) { ///判断确定执行函数
             if (isConfirm) {
                 console.log(data_list);
                 console.log(state)
@@ -317,13 +303,14 @@ $("[name='my-checkbox']").each(function () {
                         }
                     }
                 });
-            location.reload()
-            } else{
-                swal("取消！","操作已取消","error",location.reload())}
+                location.reload()
+            } else {
+                swal("取消！", "操作已取消", "error", location.reload())
+            }
         })
     });
     ///将主机的状态设置为backup
-    $(".back_switch").on('switchChange.bootstrapSwitch', function(event, state) {
+    $(".back_switch").on('switchChange.bootstrapSwitch', function (event, state) {
         console.log(7890);
         console.log(state);
         var data_list = $(this).parents('tr');
@@ -365,104 +352,108 @@ $("[name='my-checkbox']").each(function () {
                         }
                     }
                 });
-            location.reload()
-            } else{
-                swal("取消！","操作已取消","error",location.reload())}
+                location.reload()
+            } else {
+                swal("取消！", "操作已取消", "error", location.reload())
+            }
         })
     });
 </script>
 <script>
-    ////修改主机权重
-        function weight_check(aex) {
-            var data_list = $(aex).parents('tr');
-            console.log(data_list)
-            swal({
-                    title: "输入权重值！",
-                    text: "请输入：",
-                    type: "input",
-                    showCancelButton: true,
-                    closeOnConfirm: false,
-                    animation: "slide-from-top",
-                    inputPlaceholder: "输入一些话",
-                    inputType:"number"
-                },
-                function (inputValue) {
-                    var weight_number = parseInt(inputValue)
-                    console.log(weight_number)
-                    if (weight_number === "") {
-                        swal.showInputError("不能为空！");
-                        return false
-                    }
-                    if (weight_number < 1 ) {
-                        swal.showInputError("请正确输入大于1的数字");
-                        return false
-                    }
-                    var ngx_server = data_list.children().eq(1).text();
-                    var upstream_dir = data_list.children().eq(2).text();
-                    var back_host = data_list.children().eq(3).text();
-                    var host_data = ngx_server + '/' + upstream_dir + '/' + back_host
-                    $.ajax({
+    ////修改主机权重 在onclic调用函数传递this指针通过aex获取
+    function weight_check(aex) {
+        ///通过this指针获取最近的父级tr元素中的内容
+        var data_list = $(aex).parents('tr');
+        console.log(data_list)
+        ///弹框
+        swal({
+                title: "输入权重值！",
+                text: "请输入：",
+                type: "input",///选择弹框类型
+                showCancelButton: true,
+                closeOnConfirm: false,
+                animation: "slide-from-top",
+                inputPlaceholder: "输入一些话",
+                inputType: "number" ///限定数据类型
+            }, ///弹框后要执行的函数
+            function (inputValue) {
+                var weight_number = parseInt(inputValue) ///获取传递参数
+                console.log(weight_number)
+                if (weight_number === "") {
+                    swal.showInputError("不能为空！");  ///数据验证
+                    return false
+                }
+                if (weight_number < 1) {
+                    swal.showInputError("请正确输入大于1的数字");
+                    return false
+                }
+                ///获取
+                var ngx_server = data_list.children().eq(1).text();
+                var upstream_dir = data_list.children().eq(2).text();
+                var back_host = data_list.children().eq(3).text();
+                var host_data = ngx_server + '/' + upstream_dir + '/' + back_host
+                $.ajax({
+                    ///调用后台url
                     url: '/weight_change',
-                    type: 'POST',
+                    type: 'POST',///定义请求类型
                     contentType: 'application/json; charset=UTF-8',
+                    ///传递需要的参数
                     data: JSON.stringify({data: host_data, weight: weight_number}),
-                    dataType: 'json',
-                    success: function (data) {
+                    dataType: 'json', ///定义传递数据格式
+                    success: function (data) { ///成功返回后要执行的函数
                         if (data.status == 'success') {
                             swal("操作成功!", "已成功修改！", "success");
                         } else {
-                            swal("OMG", "修改操作失败了!", "error");
+                            swal("OMG", "修改操作失败了!", "failed");
                         }
                     }
                 });
-                });
-        }
+            });
+    }
 </script>
 <script>
-    ///新增主机
-    /*
-    function add_host() {
-        swal({
-                    title: "输入权重值！",
-                    text: "请输入：",
-                    type: "input",
-                    showCancelButton: true,
-                    closeOnConfirm: false,
-                    animation: "slide-from-top",
-                    inputPlaceholder: "输入一些话",
-                    inputType:"number"
-                },
-                function (inputValue) {
-                    var weight_number = parseInt(inputValue)
-                    console.log(weight_number)
-                    if (weight_number === "") {
-                        swal.showInputError("不能为空！");
-                        return false
-                    }
-                    if (weight_number < 1 ) {
-                        swal.showInputError("请正确输入大于1的数字");
-                        return false
-                    }
-                    var ngx_server = data_list.children().eq(1).text();
-                    var upstream_dir = data_list.children().eq(2).text();
-                    var back_host = data_list.children().eq(3).text();
-                    var host_data = ngx_server + '/' + upstream_dir + '/' + back_host
-                    $.ajax({
-                    url: '/weight_change',
+function delete_host(aex) {
+     var data_list = $(aex).parents('tr');
+     console.log(data_list)
+     swal({
+            title: "您确定删除这台主机吗？",
+            text: "!注意 危险操作你确定要删除这台主机？",
+            type: "warning",
+            showCancelButton: true,
+            closeOnConfirm: false,
+            confirmButtonText: "是的，我要删除",
+            cancelButtonText: "取消删除！",
+            confirmButtonColor: "#ee4329",
+            closeOnCancel: false
+        },
+         function (isConfirm) {
+            if (isConfirm) {
+                console.log(data_list)
+                var ngx_server = data_list.children().eq(1).text();
+                var upstream_dir = data_list.children().eq(2).text();
+                var back_host = data_list.children().eq(3).text();
+                var host_data = ngx_server + '/' + upstream_dir + '/' + back_host
+                console.log(host_data);
+                $.ajax({
+                    url: '/host_delete',
                     type: 'POST',
                     contentType: 'application/json; charset=UTF-8',
-                    data: JSON.stringify({data: host_data, weight: weight_number}),
+                    data: JSON.stringify({data: host_data}),
                     dataType: 'json',
                     success: function (data) {
                         if (data.status == 'success') {
-                            swal("操作成功!", "已成功修改！", "success");
+                            swal("操作成功!", "服务器已删除！", "success");
                         } else {
                             swal("OMG", "修改操作失败了!", "error");
                         }
                     }
                 });
-                });
-    }*/
+                location.reload()
+            } else {
+                swal("取消！", "操作已取消", "error", location.reload())
+            }
+        })
+    };
 </script>
 
 </body>

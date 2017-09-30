@@ -4023,6 +4023,10 @@ textarea.input-group-sm > .input-group-btn > .btn {
   margin-right: -1px;
 }
 
+.manage-articles .delete-article {
+    color: #c9302c;
+}
+
 .input-group-btn:last-child > .btn {
   margin-left: -1px;
 }
